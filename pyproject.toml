@@ -1,5 +1,5 @@
 [tool.ruff]
-target-version = "py310"
+target-version = "py39"
 extend-select = ["I", "TRY", "UP"]
 
 [tool.pytest.ini_options]
@@ -17,7 +17,7 @@ commit_extra_args = ["-e"]
 path = "tshoot/__init__.py"
 
 [tool.hatch.envs.default]
-python = "3.10"
+python = "3.9"
 dependencies = [
     "black",
     "mypy",
@@ -26,7 +26,6 @@ dependencies = [
     "pytest-cov",
     "mkdocs-material",
     "mkdocstrings[python]",
-    
 ]
 
 [tool.hatch.envs.default.scripts]
@@ -60,8 +59,19 @@ dynamic = ["version"]
 classifiers = [
     "Programming Language :: Python :: 3 :: Only",
 ]
-requires-python = ">=3.10"
+requires-python = ">=3.9"
 dependencies = [
+    "openai",
+    "dynaconf",
+]
+
+[project.scripts]
+tshoot = "tshoot.cli:run"
+
+[tool.hatch.build]
+include = [
+  "tshoot/",
+  "tests/",
 ]
 
 [project.urls]
