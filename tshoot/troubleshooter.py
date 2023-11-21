@@ -1,4 +1,6 @@
 """Troubleshooter class to troubleshoot a problem with a given prompt and model"""
+from typing import Optional
+
 from openai import OpenAI
 
 from .config import settings
@@ -6,14 +8,16 @@ from .prompts import SimplePrompt
 
 
 class Troubleshooter:
-    def __init__(self, prompt: str = None, model: str = None):
+    def __init__(
+        self, prompt: Optional[SimplePrompt] = None, model: Optional[str] = None
+    ):
         self.prompt = prompt or SimplePrompt
         self.model = model or "gpt-3.5-turbo"
         self.client = OpenAI(
             # defaults to os.environ.get("OPENAI_API_KEY")
             api_key=settings.OPENAI_API_KEY,
         )
-        self.messages = []
+        self.messages: list[dict[str, str]] = []
 
     def _run(self):
         chat_completion = self.client.chat.completions.create(

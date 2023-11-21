@@ -11,5 +11,5 @@ Can you help me?
 
 
 class SimplePrompt:
-    system = SYSTEM_PROMPT
-    user = USER_PROMPT
+    system: str = SYSTEM_PROMPT
+    user: str = USER_PROMPT

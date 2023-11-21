@@ -77,3 +77,6 @@ include = [
 [project.urls]
 Documentation = "https://di3go-sona.github.io/tshoot/"
 Source = "https://github.com/di3go-sona/tshoot"
+
+[tool.mypy]
+ignore_missing_imports = true
