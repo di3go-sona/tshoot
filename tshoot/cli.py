@@ -4,22 +4,24 @@ from .troubleshooter import Troubleshooter
 
 def _print_grey(text: str):
     """Print text in grey."""
-    print(f"\033[90m{text}\033[0m") 
+    print(f"\033[90m{text}\033[0m")
+
 
 def _read_line():
     """Read input from stdin."""
     return str(input()).strip()
+
 
 def _read_multiline():
     """Read multiline input from stdin."""
     lines = []
     while True:
         line = str(input()).strip()
-        if line == '':
+        if line == "":
             break
         else:
             lines.append(line)
-    return '\n'.join(lines)
+    return "\n".join(lines)
 
 
 def run():
@@ -40,6 +42,3 @@ def run():
 
         output = troubleshooter.ask(question=question)
         print(f"Output: {output}")
-
-
-
