@@ -1,10 +1,9 @@
 """Script to run troubleshooter."""
+import argparse
+import sys
+
 from .troubleshooter import Troubleshooter
-
-
-def _print_grey(text: str):
-    """Print text in grey."""
-    print(f"\033[90m{text}\033[0m")
+from .utils import _print_bold
 
 
 def _read_line():
@@ -13,32 +12,40 @@ def _read_line():
 
 
 def _read_multiline():
-    """Read multiline input from stdin."""
+    """Read lines from stdin until EOF."""
     lines = []
     while True:
-        line = str(input()).strip()
-        if line == "":
+        line = _read_line()
+        if not line:
             break
-        else:
-            lines.append(line)
+        lines.append(line)
     return "\n".join(lines)
 
 
+def _parse_args():
+    """Parse command line arguments."""
+    parser = argparse.ArgumentParser(description="Troubleshoot a problem with GPT-3.")
+    parser.add_argument(
+        "--verbose", "-v", action="store_true", help="print debug information"
+    )
+    return parser.parse_args()
+
+
 def run():
-    print("Running tshoot")
-    troubleshooter = Troubleshooter()
-
-    print("Problem: ")
-    problem = _read_multiline()
-    _print_grey(f"Problem: {problem}")
-
-    output = troubleshooter.troubleshoot(problem=problem)
-    print(f"Output: {output}")
+    _print_bold("[🧨] Running tshoot")
+    args = _parse_args()
+    troubleshooter = Troubleshooter(**vars(args))
 
     while True:
-        print("Ask question: ")
+        # print and flush to stdout to avoid buffering
+        print("[👨‍💻]", end="")
+        sys.stdout.flush()
         question = _read_line()
-        _print_grey(f"Question: {question}")
 
+        print("[🤖]", end="")
+        sys.stdout.flush()
         output = troubleshooter.ask(question=question)
-        print(f"Output: {output}")
+        for part in output:
+            print(part, end="")
+            sys.stdout.flush()
+        print()
