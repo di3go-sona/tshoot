@@ -3,30 +3,32 @@ from typing import Optional
 
 from openai import OpenAI
 
-from .config import settings
-from .prompts import SimplePrompt
+from .config import load_settings
+from .prompts import PROMPTS
 from .utils import _print_grey
 
 
 class Troubleshooter:
     def __init__(
         self,
-        prompt: Optional[SimplePrompt] = None,
+        prompt: Optional[str] = None,
         model: Optional[str] = None,
         verbose: bool = False,
         **kwargs,
     ):
-        self.prompt = prompt or SimplePrompt
-        self.model = model or "gpt-3.5-turbo"
-        self.verbose = verbose
+        self.settings = load_settings()
+        self.prompt = PROMPTS[prompt or self.settings.PROMPT]
+        self.model = model or self.settings.OPENAI_MODEL
+        self.verbose = verbose or self.settings.VERBOSE
+
         self.client = OpenAI(
             # defaults to os.environ.get("OPENAI_API_KEY")
-            api_key=settings.OPENAI_API_KEY,
+            api_key=self.settings.OPENAI_API_KEY,
         )
         self.messages: list[dict[str, str]] = [
             {
                 "role": "system",
-                "content": self.prompt.system,
+                "content": self.prompt,
             }
         ]
 

@@ -1,8 +1,9 @@
 """Script to run troubleshooter."""
-import subprocess
 import argparse
+import subprocess
 import sys
 
+from .config import load_settings
 from .troubleshooter import Troubleshooter
 from .utils import _print_bold
 
@@ -12,6 +13,7 @@ def _read_input(args, eval_mode=False):
     if args.multiline:
         return _read_multiline()
     return _read_line()
+
 
 def _read_line():
     """Read input from stdin."""
@@ -26,9 +28,6 @@ def _read_line():
     return line
 
 
-        
-
-
 def _read_multiline():
     """Read lines from stdin until EOF."""
     lines = []
@@ -38,7 +37,7 @@ def _read_multiline():
             lines.append(line)
         except EOFError:
             break
-        
+
     return "\n".join(lines)
 
 
@@ -46,14 +45,13 @@ def _parse_args():
     """Parse command line arguments."""
     parser = argparse.ArgumentParser(description="Troubleshoot a problem with GPT-3.")
     parser.add_argument(
-        "--verbose", "-v",
-        action="store_true",
-        help="print debug information"
+        "--verbose", "-v", action="store_true", help="print debug information"
     )
     parser.add_argument(
-        "--multiline", "-m",
+        "--multiline",
+        "-m",
         action="store_true",
-        help="read multiple lines of input, terminate with CTRL-D"
+        help="read multiple lines of input, terminate with CTRL-D",
     )
 
     return parser.parse_args()
@@ -62,18 +60,19 @@ def _parse_args():
 def run():
     _print_bold("[🧨] Running tshoot")
     args = _parse_args()
+    settings = load_settings()
     troubleshooter = Troubleshooter(**vars(args))
 
     while True:
         # print and flush to stdout to avoid buffering
         if args.multiline:
-            print("[👨‍💻][ Multiline input, terminate with CTRL-D ]")
+            print(f"[{settings.USER_ICON}][ Multiline input, terminate with CTRL-D ]")
         else:
-            print("[👨‍💻] ", end="")
+            print(f"[{settings.USER_ICON}] ", end="")
         sys.stdout.flush()
         question = _read_input(args, eval_mode=True)
 
-        print("[🤖] ", end="")
+        print(f"[{settings.ASSISTANT_ICON}] ", end="")
         sys.stdout.flush()
         output = troubleshooter.ask(question=question)
         for part in output:
