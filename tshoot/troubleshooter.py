@@ -14,6 +14,7 @@ class Troubleshooter:
         prompt: Optional[SimplePrompt] = None,
         model: Optional[str] = None,
         verbose: bool = False,
+        **kwargs,
     ):
         self.prompt = prompt or SimplePrompt
         self.model = model or "gpt-3.5-turbo"
@@ -58,10 +59,14 @@ class Troubleshooter:
         self._add_new_message(role="assistant", content="")
 
         for chunk in chat_completion:
-            part = chunk.choices[0].delta.content
-            if part is not None:
-                self._add_message_part(part)
-                yield part
+            try:
+                part = chunk.choices[0].delta.content
+                if part is not None:
+                    self._add_message_part(part)
+                    yield part
+            except KeyboardInterrupt:
+                # self._add_new_message(role="system", content="Chat interrupted")
+                break
 
     def ask(self, question: str):
         """Ask a question to help troubleshoot the problem with the given prompt and model"""
