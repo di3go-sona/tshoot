@@ -39,6 +39,7 @@ def load_settings(ask=None):
         envvar_prefix="TSHOOT",
         # root_path=os.path.dirname(__file__),
         settings_files=[SETTINGS_PATH],
+        DEFAULT_SETTINGS_PATH
     )
 
     required_settings_fields = [f["name"] for f in get_settings_fields()]
