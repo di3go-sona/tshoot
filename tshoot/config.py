@@ -2,7 +2,7 @@ import os
 
 from dynaconf import Dynaconf, loaders
 from dynaconf.utils.boxing import DynaBox
-from PyInquirer import prompt
+from InquirerPy import prompt
 
 from .config_helper import get_settings_fields
 
@@ -32,7 +32,7 @@ def ask_settings(write=True):
     return settings
 
 
-def load_settings():
+def load_settings(ask=None):
     """Get the settings."""
     settings = Dynaconf(
         envvar_prefix="TSHOOT",
@@ -43,7 +43,7 @@ def load_settings():
     required_settings_fields = [f["name"] for f in get_settings_fields()]
     present_settings_field = [settings.exists(f) for f in required_settings_fields]
 
-    if not all(present_settings_field):
+    if ask or not all(present_settings_field):
         settings = ask_settings(write=True)
 
     return settings

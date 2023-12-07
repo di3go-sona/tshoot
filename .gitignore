@@ -112,3 +112,5 @@ ENV/
 
 # Ignore dynaconf secret files
 .secrets.*
+
+.ruff_cache

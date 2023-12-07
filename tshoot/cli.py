@@ -22,7 +22,7 @@ def _read_line():
         command_line = line[1:]
         process = subprocess.run(command_line, shell=True, capture_output=True)
         process_output = process.stdout.decode("utf-8").strip()
-        print(f"[📺][ Command output ] {process_output}")
+        print(f"[📺][ Command output ]\n{process_output}")
         line += "\n" + process_output
 
     return line
@@ -53,6 +53,11 @@ def _parse_args():
         action="store_true",
         help="read multiple lines of input, terminate with CTRL-D",
     )
+    parser.add_argument(
+        "--configure",
+        action="store_true",
+        help="Open the configuration menu to change settings and exit",
+    )
 
     return parser.parse_args()
 
@@ -60,7 +65,7 @@ def _parse_args():
 def run():
     _print_bold("[🧨] Running tshoot")
     args = _parse_args()
-    settings = load_settings()
+    settings = load_settings(ask=args.configure)
     troubleshooter = Troubleshooter(**vars(args))
 
     while True:

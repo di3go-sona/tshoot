@@ -25,7 +25,7 @@ dependencies = [
     "pytest",
     "pytest-cov",
     "mkdocs-material",
-    "mkdocstrings[python]",
+    "mkdocstrings[python]"
 ]
 
 [tool.hatch.envs.default.scripts]
@@ -63,6 +63,7 @@ requires-python = ">=3.9"
 dependencies = [
     "openai",
     "dynaconf",
+    "InquirerPy"
 ]
 
 [project.scripts]
