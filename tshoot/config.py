@@ -38,8 +38,8 @@ def load_settings(ask=None):
     settings = Dynaconf(
         envvar_prefix="TSHOOT",
         # root_path=os.path.dirname(__file__),
-        settings_files=[SETTINGS_PATH],
-        DEFAULT_SETTINGS_PATH
+        settings_files=[DEFAULT_SETTINGS_PATH, SETTINGS_PATH],
+        
     )
 
     required_settings_fields = [f["name"] for f in get_settings_fields()]
