@@ -22,6 +22,7 @@ jobs:
         pip install hatch
         hatch env create
         echo "$TSHOOT_CONFIG_FILE" > tshoot/settings.toml
+        echo tshoot/settings.toml
     - name: Lint and typecheck
       run: |
         hatch run lint-check
