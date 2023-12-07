@@ -7,6 +7,7 @@ from InquirerPy import prompt
 from .config_helper import get_settings_fields
 
 SETTINGS_PATH = os.path.expanduser("~/.tshoot/settings.toml")
+DEFAULT_SETTINGS_PATH = os.path.dirname(__file__) + "/settings.toml"
 
 
 def write_settings(settings):
@@ -21,7 +22,7 @@ def ask_settings(write=True):
     settings = Dynaconf(
         envvar_prefix="TSHOOT",
         # root_path=os.path.dirname(__file__),
-        settings_files=[SETTINGS_PATH],
+        settings_files=[DEFAULT_SETTINGS_PATH, SETTINGS_PATH],
     )
     questions = get_settings_fields(settings)
     configuration = prompt(questions)
