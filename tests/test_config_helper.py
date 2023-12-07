@@ -1,5 +1,12 @@
 import unittest
-from tshoot.config_helper import get_settings_fields, OpenAIKeyValidator, OPENAI_MODELS, PROMPTS
+
+from tshoot.config_helper import (
+    OPENAI_MODELS,
+    PROMPTS,
+    OpenAIKeyValidator,
+    get_settings_fields,
+)
+
 
 class TestConfigHelper(unittest.TestCase):
     def test_get_settings_fields(self):
@@ -10,7 +17,7 @@ class TestConfigHelper(unittest.TestCase):
             "prompt": "default_prompt",
             "user_icon": "default_user_icon",
             "assistant_icon": "default_assistant_icon",
-            "verbose": True
+            "verbose": True,
         }
         expected_questions = [
             {
@@ -71,5 +78,6 @@ class TestConfigHelper(unittest.TestCase):
         result = get_settings_fields(defaults)
         self.assertEqual(result, expected_questions)
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     unittest.main()
