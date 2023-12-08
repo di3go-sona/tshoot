@@ -23,6 +23,7 @@ jobs:
         hatch env create
         echo "$TSHOOT_CONFIG_FILE" > tshoot/settings.toml
         cat tshoot/settings.toml
+      shell: bash
     - name: Lint and typecheck
       run: |
         hatch run lint-check
