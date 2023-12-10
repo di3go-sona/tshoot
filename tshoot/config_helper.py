@@ -60,7 +60,7 @@ def get_settings_fields(defaults=None):
     defaults = defaults or {}
     questions = [
         {
-            "type": "input",
+            "type": "password",
             "name": "openai_api_key",
             "message": "Insert the OpenAI API key",
             "validate": validate_openai_key,

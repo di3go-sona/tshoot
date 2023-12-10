@@ -116,3 +116,5 @@ ENV/
 .ruff_cache
 
 settings.toml
+
+tshoot.cast

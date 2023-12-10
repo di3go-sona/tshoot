@@ -23,6 +23,8 @@ The main idea is to have a quick way to have your troubleshooting workflow overs
 
 The philosophy behind this project is to create a tool that should have minimal dependencies and should be easy to install and ready to use.
 
+[![asciicast](https://asciinema.org/a/5UDk0XOruccA45eHF86usvEJy.svg)](https://asciinema.org/a/5UDk0XOruccA45eHF86usvEJy)
+
 ## Installation
 
 You can install tshoot with pip:
