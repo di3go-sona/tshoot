@@ -17,45 +17,43 @@ OPENAI_MODELS = [
     "gpt-4-32k",
 ]
 
+def validate_openai_key( api_key):
 
-class OpenAIKeyValidator(Validator):
-    def validate(self, document):
-        api_key = document.text
-
-        regex = re.compile(r"^sk-[a-zA-Z0-9]+$")
-        if not regex.match(document.text):
-            raise ValidationError(
-                message="Please enter a key in the format sk-XXXXXXXXXXXXXXXX",
-                cursor_position=len(document.text),
-            )
-
-        openai_client = OpenAI(
-            # defaults to os.environ.get("OPENAI_API_KEY")
-            api_key=api_key
+    regex = re.compile(r"^sk-[a-zA-Z0-9]+$")
+    if not regex.match(api_key):
+        raise ValidationError(
+            message="Please enter a key in the format sk-XXXXXXXXXXXXXXXX",
+            cursor_position=len(api_key),
         )
 
-        try:
-            test_messages = [
-                {
-                    "role": "system",
-                    "content": "Test message",
-                }
-            ]
-            chat_completion = openai_client.chat.completions.create(
-                messages=test_messages,
-                model="gpt-3.5-turbo",
-                stream=True,
-            )
-            for chunk in chat_completion:
-                if chunk:
-                    break
+    openai_client = OpenAI(
+        # defaults to os.environ.get("OPENAI_API_KEY")
+        api_key=api_key
+    )
 
-        except OpenAIError as e:
-            raise ValidationError(
-                message=f"Please enter a valid key encountered error: {e}",
-                cursor_position=len(document.text),
-            ) from e
+    try:
+        test_messages = [
+            {
+                "role": "system",
+                "content": "Test message",
+            }
+        ]
+        chat_completion = openai_client.chat.completions.create(
+            messages=test_messages,
+            model="gpt-3.5-turbo",
+            stream=True,
+        )
+        for chunk in chat_completion:
+            if chunk:
+                break
 
+    except OpenAIError as e:
+        raise ValidationError(
+            message=f"Please enter a valid key encountered error: {e}",
+            cursor_position=len(api_key),
+        ) from e
+    
+    return True
 
 def get_settings_fields(defaults=None):
     """Get the configuration fields."""
@@ -65,7 +63,7 @@ def get_settings_fields(defaults=None):
             "type": "input",
             "name": "openai_api_key",
             "message": "Insert the OpenAI API key",
-            "validate": OpenAIKeyValidator,
+            "validate": validate_openai_key,
             "default": defaults.get("openai_api_key", ""),
         },
         {

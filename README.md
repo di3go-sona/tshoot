@@ -1,7 +1,7 @@
 # Tshoot
 
 <p align="center">
-    <em>A simple CLI commands to try troubleshooting errors with LLMs</em>
+    <em>A simple CLI command for troubleshooting errors with LLMs</em>
 </p>
 
 [![build](https://github.com/di3go-sona/tshoot/workflows/Build/badge.svg)](https://github.com/di3go-sona/tshoot/actions)
@@ -15,12 +15,34 @@
 **Source Code**: <a href="https://github.com/di3go-sona/tshoot" target="_blank">https://github.com/di3go-sona/tshoot</a>
 
 ---
+## Introduction
 
-## Development
+The idea of tshoot is quite simple, by running the command `tshoot` you'll open a chat session with one of OpenAI's LLMs, you can dialogue with it and at the same time run commands by prefixing the line with `!`, the command will be executed on your local machine and the output will be displayed in the chat and added to the conversation history.
 
-### Setup environment
+The main idea is to have a quick way to have your troubleshooting workflow overseen by an AI, potentially retrieving the information you need to solve your problem without any context switch, directly in your terminal.
 
-We use [Hatch](https://hatch.pypa.io/latest/install/) to manage the development environment and production build. Ensure it's installed on your system.
+The philosophy behind this project is to create a tool that should have minimal dependencies and should be easy to install and ready to use.
+
+## Installation
+
+You can install tshoot with pip:
+
+```
+pip install tshoot
+```
+
+## Development Setup
+
+
+The project is packaged and shipped with [Hatch](https://hatch.pypa.io/latest/install/).
+The following scripts are installed in your virtual environment:
+-  `hatch run docs-build`
+-  `hatch run docs-serve`
+-  `hatch run lint`
+-  `hatch run lint-check`
+-  `hatch run test`
+-  `hatch run test-cov-xml`
+
 
 ### Run unit tests
 
@@ -38,25 +60,6 @@ Execute the following command to apply linting and check typing:
 hatch run lint
 ```
 
-### Publish a new version
-
-You can bump the version, create a commit and associated tag with one command:
-
-```bash
-hatch version patch
-```
-
-```bash
-hatch version minor
-```
-
-```bash
-hatch version major
-```
-
-Your default Git text editor will open so you can add information about the release.
-
-When you push the tag on GitHub, the workflow will automatically publish it on PyPi and a GitHub release will be created as draft.
 
 ## Serve the documentation
 
@@ -67,6 +70,12 @@ hatch run docs-serve
 ```
 
 It'll automatically watch for changes in your code.
+
+
+## Contributing
+
+Every contribution that is in synch with the package philosofy is more than welcome, feel free to open an issue or submit a pull request.
+
 
 ## License
 

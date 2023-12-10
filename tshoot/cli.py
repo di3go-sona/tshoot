@@ -17,7 +17,12 @@ def _read_input(args, eval_mode=False):
 
 def _read_line():
     """Read input from stdin."""
-    line = str(input()).strip()
+    try:
+        line = str(input()).strip()
+    except EOFError:
+        print("\n[👋] Bye!")
+        exit(0)
+
     if line.startswith("!"):
         command_line = line[1:]
         process = subprocess.run(command_line, shell=True, capture_output=True)
@@ -26,6 +31,8 @@ def _read_line():
         line += "\n" + process_output
 
     return line
+
+
 
 
 def _read_multiline():
