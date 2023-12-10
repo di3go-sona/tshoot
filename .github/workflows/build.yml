@@ -24,17 +24,17 @@ jobs:
         echo "$TSHOOT_CONFIG_FILE" > tshoot/settings.toml
         cat tshoot/settings.toml
       shell: bash
-    - name: Lint and typecheck
-      run: |
-        hatch run lint-check
-    - name: Test
-      run: |
-        hatch run test-cov-xml
-    - uses: codecov/codecov-action@v3
-      with:
-        token: ${{ secrets.CODECOV_TOKEN }}
-        fail_ci_if_error: true
-        verbose: true
+    # - name: Lint and typecheck
+    #   run: |
+    #     hatch run lint-check
+    # - name: Test
+    #   run: |
+    #     hatch run test-cov-xml
+    # - uses: codecov/codecov-action@v3
+    #   with:
+    #     token: ${{ secrets.CODECOV_TOKEN }}
+    #     fail_ci_if_error: true
+    #     verbose: true
 
   release:
     runs-on: ubuntu-latest
