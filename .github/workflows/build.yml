@@ -21,20 +21,22 @@ jobs:
         python -m pip install --upgrade pip
         pip install hatch
         hatch env create
-        echo "$TSHOOT_CONFIG_FILE" >> ./tshoot/settings.toml
+        echo "$TSHOOT_CONFIG_FILE_SECRET" >> ./tshoot/settings.toml
         cat tshoot/settings.toml
       shell: bash
-    # - name: Lint and typecheck
-    #   run: |
-    #     hatch run lint-check
-    # - name: Test
-    #   run: |
-    #     hatch run test-cov-xml
-    # - uses: codecov/codecov-action@v3
-    #   with:
-    #     token: ${{ secrets.CODECOV_TOKEN }}
-    #     fail_ci_if_error: true
-    #     verbose: true
+      env:
+        TSHOOT_CONFIG_FILE_SECRET : ${{secrets.TSHOOT_CONFIG_FILE}}
+    - name: Lint and typecheck
+      run: |
+        hatch run lint-check
+    - name: Test
+      run: |
+        hatch run test-cov-xml
+    - uses: codecov/codecov-action@v3
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}
+        fail_ci_if_error: true
+        verbose: true
 
   release:
     runs-on: ubuntu-latest
