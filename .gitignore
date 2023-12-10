@@ -114,3 +114,5 @@ ENV/
 .secrets.*
 
 .ruff_cache
+
+settings.toml
