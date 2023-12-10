@@ -5,7 +5,7 @@
 </p>
 
 [![build](https://github.com/di3go-sona/tshoot/workflows/Build/badge.svg)](https://github.com/di3go-sona/tshoot/actions)
-[![codecov](https://codecov.io/gh/di3go-sona/tshoot/branch/master/graph/badge.svg)](https://codecov.io/gh/di3go-sona/tshoot)
+[![codecov](https://codecov.io/gh/di3go-sona/tshoot/graph/badge.svg?token=R4xWCp7AXq)](https://codecov.io/gh/di3go-sona/tshoot)
 [![PyPI version](https://badge.fury.io/py/tshoot.svg)](https://badge.fury.io/py/tshoot)
 
 ---
