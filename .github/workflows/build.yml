@@ -22,7 +22,6 @@ jobs:
         pip install hatch
         hatch env create
         echo "$TSHOOT_CONFIG_FILE_SECRET" >> ./tshoot/settings.toml
-        cat tshoot/settings.toml
       shell: bash
       env:
         TSHOOT_CONFIG_FILE_SECRET : ${{secrets.TSHOOT_CONFIG_FILE}}
