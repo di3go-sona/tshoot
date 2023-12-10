@@ -3,8 +3,8 @@ import unittest
 from tshoot.config_helper import (
     OPENAI_MODELS,
     PROMPTS,
-    OpenAIKeyValidator,
     get_settings_fields,
+    validate_openai_key,
 )
 
 
@@ -21,10 +21,10 @@ class TestConfigHelper(unittest.TestCase):
         }
         expected_questions = [
             {
-                "type": "input",
+                "type": "password",
                 "name": "openai_api_key",
                 "message": "Insert the OpenAI API key",
-                "validate": OpenAIKeyValidator,
+                "validate": validate_openai_key,
                 "default": "default_key",
             },
             {

@@ -33,8 +33,6 @@ def _read_line():
     return line
 
 
-
-
 def _read_multiline():
     """Read lines from stdin until EOF."""
     lines = []

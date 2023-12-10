@@ -5,7 +5,7 @@
 import re
 
 from openai import OpenAI, OpenAIError
-from prompt_toolkit.validation import ValidationError, Validator
+from prompt_toolkit.validation import ValidationError
 
 from .prompts import PROMPTS
 
@@ -17,8 +17,8 @@ OPENAI_MODELS = [
     "gpt-4-32k",
 ]
 
-def validate_openai_key( api_key):
 
+def validate_openai_key(api_key):
     regex = re.compile(r"^sk-[a-zA-Z0-9]+$")
     if not regex.match(api_key):
         raise ValidationError(
@@ -52,8 +52,9 @@ def validate_openai_key( api_key):
             message=f"Please enter a valid key encountered error: {e}",
             cursor_position=len(api_key),
         ) from e
-    
+
     return True
+
 
 def get_settings_fields(defaults=None):
     """Get the configuration fields."""
