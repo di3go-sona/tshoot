@@ -2,6 +2,7 @@
 * Pizza delivery prompt example
 * run example by writing `python example/pizza.py` in your console
 """
+
 import re
 
 from openai import OpenAI, OpenAIError

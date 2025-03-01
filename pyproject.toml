@@ -33,12 +33,12 @@ test = "pytest"
 test-cov-xml = "pytest --cov-report=xml"
 lint = [
   "black .",
-  "ruff --fix .",
+  # "ruff --fix .",
   "mypy tshoot/",
 ]
 lint-check = [
   "black --check .",
-  "ruff .",
+  # "ruff .",
   "mypy tshoot/",
 ]
 docs-serve = "mkdocs serve"

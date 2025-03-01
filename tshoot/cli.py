@@ -1,4 +1,5 @@
 """Script to run troubleshooter."""
+
 import argparse
 import subprocess
 import sys

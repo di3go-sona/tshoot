@@ -1,4 +1,5 @@
 """Troubleshooter class to troubleshoot a problem with a given prompt and model"""
+
 from typing import Optional
 
 from openai import OpenAI
