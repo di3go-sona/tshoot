@@ -19,7 +19,7 @@ OPENAI_MODELS = [
 
 
 def validate_openai_key(api_key):
-    regex = re.compile(r"^sk-[a-zA-Z0-9]+$")
+    regex = re.compile(r"^sk-.+$")
     if not regex.match(api_key):
         raise ValidationError(
             message="Please enter a key in the format sk-XXXXXXXXXXXXXXXX",
